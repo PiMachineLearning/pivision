@@ -2,8 +2,12 @@
 
 docker build -t pimachinelearning/pivision .
 WHEEL=$(docker run pimachinelearning/pivision)
+[[ -d pimachinelearning.github.io ]] && rm -rf pimachinelearning.github.io
 git clone https://__token__:$GITHUB_TOKEN@github.com/piMachineLearning/pimachinelearning.github.io/
 cd pimachinelearning.github.io/ || exit 1
+git config commit.gpgsign false
+git config user.name 'Automated Committer'
+git config user.email 'bot@malwarefight.wip.la'
 cd wheels || exit 1
 [[ -d torchvision ]] || mkdir torchvision
 cd torchvision || exit 1

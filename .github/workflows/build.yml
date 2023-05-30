@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Create and push image
+      - name: Create and push wheel
         run: |
             cd $GITHUB_WORKSPACE
             sudo apt install qemu-user-static binfmt-support

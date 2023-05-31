@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-docker build --build-arg -t VISION_VERSION=$1 pimachinelearning/pivision .
+docker build --build-arg VISION_VERSION=$1 -t pimachinelearning/pivision .
 WHEEL=$(docker run pimachinelearning/pivision)
 [[ -d pimachinelearning.github.io ]] && rm -rf pimachinelearning.github.io
 git clone https://__token__:$GITHUB_TOKEN@github.com/piMachineLearning/pimachinelearning.github.io/

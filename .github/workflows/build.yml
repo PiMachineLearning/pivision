@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: set-matrix
-        run: echo "version_matrix=$(curl https://api.github.com/repos/pytorch/vision/releases | jq -r '.[]["tag_name"]' | sed s/v// | jq -Rn '[inputs]')" >> $GITHUB_OUTPUT
+        run: echo "version_matrix=$(curl https://api.github.com/repos/pytorch/vision/releases | jq -r '.[]["tag_name"]' | sed s/v// | jq -Rcn '[inputs]')" >> $GITHUB_OUTPUT
     outputs:
       version_matrix: ${{ steps.set-matrix.outputs.version_matrix }}
   run:

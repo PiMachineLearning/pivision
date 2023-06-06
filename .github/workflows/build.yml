@@ -33,6 +33,7 @@ jobs:
       - name: Create and push wheel
         run: |
             cd $GITHUB_WORKSPACE
+            sudo apt update
             sudo apt install qemu-user-static binfmt-support
             chmod +x main.sh
             ./main.sh ${{ matrix.version }}

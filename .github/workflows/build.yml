@@ -8,6 +8,10 @@ on:
   push:
     branches: [ "main" ]
 
+concurrency:
+  group: "torchvision"
+  cancel-in-progress: false
+
 jobs:
   build-matrix:
     runs-on: ubuntu-latest

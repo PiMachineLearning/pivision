@@ -1,4 +1,4 @@
-import sys
+import sys, subprocess
 
 VERSION_DICT = {
     "0.15": "2.0.1",
@@ -15,6 +15,7 @@ VERSION_DICT = {
     "0.4.2": "1.3.1",
     "0.4.3": "1.3.1",
     "0.4.1": "1.2.0",
+    "0.4.0": "1.1.0",
     "0.3": "1.1.0",
     "0.2": "1.0.1"
 }
@@ -23,7 +24,6 @@ version = sys.argv[1]
 
 for key in VERSION_DICT:
     if version.startswith(key):
-        print(VERSION_DICT[key])
-        exit(0)
+        exit(subprocess.check_call([sys.executable, "-m", "pip", "install", "torch==" + VERSION_DICT[key]]))
 
-print("2.0.1") # bad fallback
+exit(subprocess.check_call([sys.executable, "-m", "pip", "install", "torch==2.0.1"]))

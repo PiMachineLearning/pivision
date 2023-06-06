@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-docker build --build-arg VISION_VERSION=$1 -t pimachinelearning/pivision .
+rm *.whl
+docker build --build-arg VISION_VERSION=$1 -t pimachinelearning/pivision . || exit 1
 WHEEL=$(docker run pimachinelearning/pivision)
 docker cp $(docker ps -aq -n 1):$WHEEL .
 LOCAL_FILE=$(ls | grep whl)
@@ -18,3 +18,4 @@ done
 echo -e "put empty uploader/lock" | sftp -b - uploader@$VPS_HOST 
 echo -e "cd uploader/wheels/torchvision\nput $LOCAL_FILE" | sftp -b - uploader@$VPS_HOST
 echo -e "rm uploader/lock" | sftp uploader@$VPS_HOST
+rm *.whl && rm empty

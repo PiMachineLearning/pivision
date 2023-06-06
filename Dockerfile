@@ -6,7 +6,7 @@ RUN wget https://github.com/pytorch/vision/archive/refs/tags/v${VISION_VERSION}.
 
 COPY pip.conf /etc/pip.conf
 COPY determine-pytorch-version.py /vision/determine-pytorch-version.py
-RUN cd vision && apt install -y libatlas3-base libgfortran5 && python3 -m pip install torch numpy pillow wheel 
-RUN cd vision && BUILD_VERSION=${VISION_VERSION} PYTORCH_VERSION=$(python determine-pytorch-version.py ${VISION_VERSION}) python3 setup.py bdist_wheel
+RUN cd vision && apt install -y libatlas3-base libgfortran5 && python3 -m pip install torch==$(python determine-pytorch-version.py ${VISION_VERSION}) numpy pillow wheel 
+RUN cd vision && BUILD_VERSION=${VISION_VERSION} python3 setup.py bdist_wheel
 
 CMD ["find", "/vision", "-name", "torchvision*.whl"]
